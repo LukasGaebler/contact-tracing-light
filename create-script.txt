@@ -1,0 +1,21 @@
+CREATE (HannahR:Person {name: 'Hannah R.'})
+CREATE (RogerR:Person {name: 'Roger R.'})
+CREATE (StellaR:Person {name: 'Stella R.'})
+CREATE (LisaG:Person {name: 'Lisa G.'})
+CREATE (Viki:Person {name: 'Viki S.'})
+
+CREATE (Geburtstagsfeier:Event {title: 'Stellas Geburtstagsfeier', date: '27.12.2021'})
+CREATE (Praterdome:Event {title: 'Praterdome', date: '30.12.2021'})
+
+CREATE 
+    (HannahR)-[:ATTENDED {duration:300}]->(Geburtstagsfeier),
+    (HannahR)-[:LIVES_WITH]->(StellaR),
+    (HannahR)-[:LIVES_WITH]->(RogerR),
+    (RogerR)-[:LIVES_WITH]->(HannahR),
+    (RogerR)-[:LIVES_WITH]->(StellaR),
+    (StellaR)-[:LIVES_WITH]->(HannahR),
+    (StellaR)-[:LIVES_WITH]->(RogerR),
+    (HannahR)-[:HAS_MET]->(LisaG),
+    (Viki)-[:ATTENDED {duration:600}]->(Geburtstagsfeier),
+    (Viki)-[:ATTENDED {duration: 742}]->(Praterdome)
+
