@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "lodash": "^4.17.21",
+    "neo4j-driver": "^4.4.1"
+  }
 }
