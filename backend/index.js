@@ -31,7 +31,7 @@ app.post("/removePerson", async (req, res) => {
 app.get("/getEvents", async (req, res) => { 
     const session = driver.session();
     let result = await session.run(`MATCH (event:Event) RETURN event`);
-    session.close();
+    session.close();Ww
     res.send(result);
 });
 
