@@ -1,0 +1,80 @@
+<div class="main">
+  <h1>Contact Tracing Light</h1>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2 class="text-3x1">Add Person</h2>
+      <form [formGroup]="addPersonForm" (ngSubmit)="addPerson()">
+        <input formControlName="name" class="form-control" placeholder="Name"/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of people" scope="row">
+            <td>{{person}}</td>
+            <td>
+              <button (click)="removePerson(person)" class="btn btn-danger">Delete</button>
+              <button class="btn btn-primary">Info</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-6">
+      <h2>Add Event</h2>
+      <form [formGroup]="addEventForm" (ngSubmit)="addEvent()">
+        <input formControlName="title" class="form-control" placeholder="Title"/>
+        <br /><br />
+        <input formControlName="date" class="form-control" placeholder="Date" type="date" />
+        <br /><br />
+        <button class="btn btn-primary" type="submit">Add Event</button>
+      </form>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of events" scope="row">
+            <td>{{event.title}}</td>
+            <td>{{event.date}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="removeEvent(event.title)">Remove event</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-sm-6">
+      <h2 class="text-3x1">Link Person to Event</h2>
+      <form [formGroup]="linkPersonToEventForm" (ngSubmit)="linkPersonToEvent()">
+        <h3 class="underline">Event:</h3>
+        <select formControlName="event" class="form-select">
+          <option *ngFor="let event of events" [value]="event.title">{{event.title}} - {{event.date}}</option>
+        </select>
+        <h3 class="underline">Person:</h3>
+        <select formControlName="person" class="form-select">
+          <option *ngFor="let person of people" [value]="person">{{person}}</option>
+        </select>
+        <br />
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+</div>
