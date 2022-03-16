@@ -30,4 +30,8 @@ export class PersonService {
       name, title
     })
   }
+
+  getPersonPerEvent() {
+    return this.http.get("http://localhost:8080/personAttends")
+  }
 }

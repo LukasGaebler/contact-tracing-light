@@ -31,7 +31,7 @@ app.post("/removePerson", async (req, res) => {
 app.get("/getEvents", async (req, res) => { 
     const session = driver.session();
     let result = await session.run(`MATCH (event:Event) RETURN event`);
-    session.close();Ww
+    session.close();
     res.send(result);
 });
 
@@ -59,6 +59,13 @@ app.post("/removeEvent", async (req, res) => {
     let result = await session.run(`match (e:Event {title: $title}) detach delete e`, {
         title: req.body.title
     });
+    session.close();
+    res.send(result);
+})
+
+app.get("/personAttends", async (req, res) => {
+    const session = driver.session();
+    let result = await session.run(`match (p:Person)-[:ATTENDED]-(e:Event) return p,e`);
     session.close();
     res.send(result);
 })

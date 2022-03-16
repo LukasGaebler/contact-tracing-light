@@ -30,9 +30,12 @@ export class AppComponent implements OnInit {
   people:any[] = []
   events: any[] = []
 
+  eventsPerPerson: any[] = [];
+
   ngOnInit(): void {
       this.getPeople();
       this.getEvents();
+      this.getEventsPerPerson();
   }
 
 
@@ -69,7 +72,8 @@ export class AppComponent implements OnInit {
     let name = this.linkPersonToEventForm.controls["person"].value
 
     this.personService.linkPersonToEvent(name, title).subscribe(() => {
-      alert("WUHUUU")
+      alert("Person linked to event")
+      this.getEventsPerPerson();
     })
     
   }
@@ -92,6 +96,18 @@ export class AppComponent implements OnInit {
       alert("event removed")
       this.getEvents();
     });
+  }
+
+  getEventsPerPerson() {
+    this.eventsPerPerson = [];
+    this.personService.getPersonPerEvent().subscribe((data: any) => {
+      data["records"].forEach((dat: any) => {
+        const name = dat["_fields"][0].properties.name;
+        const event = dat["_fields"][1].properties.title;
+        const date = dat["_fields"][1].properties.date;
+        this.eventsPerPerson.push({name,event,date})
+      })
+    })
   }
 
   private getPeople() {
